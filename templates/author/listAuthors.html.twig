@@ -1,0 +1,132 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Author List{% endblock %}
+
+{% block body %}
+  <style>
+    .example-wrapper {
+      margin: 1.5em auto;
+      max-width: 90%;
+      font-family: 'Arial', sans-serif;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      background-color: #ffffff;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #343a40;
+    }
+
+    .table {
+      width: 100%;
+      margin-top: 20px;
+      border-radius: 8px;
+      overflow: hidden;
+      border-collapse: collapse;
+    }
+
+    .table th, .table td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #dee2e6;
+      transition: background-color 0.3s;
+    }
+
+    .table th {
+      background-color: #495057;
+      color: white;
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+
+    .table tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    .table tr:hover {
+      background-color: #e1f5fe;
+    }
+
+    .btn {
+      font-size: 14px;
+      margin-right: 5px;
+      border-radius: 5px;
+    }
+
+    .btn-outline-primary {
+      border-color: #007bff;
+      color: #007bff;
+    }
+
+    .btn-outline-danger {
+      border-color: #dc3545;
+      color: #dc3545;
+    }
+
+    .btn-outline-success {
+      border-color: #28a745;
+      color: #28a745;
+    }
+
+    .btn-add {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .alert {
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
+
+  <div class="example-wrapper">
+    <h2>List of Authors</h2>
+
+    {% if authors is empty %}
+      <div class="alert alert-danger">
+        No Authors found.
+      </div>
+    {% else %}
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Books</th>
+            <th colspan="2" style="text-align: center;">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for a in authors %}
+            <tr>
+              <td>{{ a.id }}</td>
+              <td>{{ a.name }}</td>
+              <td>{{ a.email }}</td>
+              <td>
+                {# <ul style="padding: 0; margin: 0; list-style: none;">
+                  {% for b in a.books %}
+                    <li style="margin: 5px 0;">{{ b.title }}</li>
+                  {% endfor %}
+                </ul> #}
+              </td>
+              <td style="text-align: center;">
+                <a class="btn btn-outline-primary" href="{{ path('app_author_update', { id: a.id }) }}">Update</a>
+              </td>
+              <td style="text-align: center;">
+                <a class="btn btn-outline-danger" href="{{ path('app_author_delete', { id: a.id }) }}">Remove</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+
+    <div class="text-center btn-add">
+      <a class="btn btn-outline-success" href="{{ path('app_author_add') }}">Add Author</a>
+    </div>
+  </div>
+{% endblock %}

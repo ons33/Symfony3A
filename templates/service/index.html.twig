@@ -1,0 +1,67 @@
+{# <head> <link href={{asset('liencss')}}>
+<script src={{asset('lienjs')}}>
+</head> #}
+
+{{n}}
+
+{{p[0].id}}
+{{p[0].name}}
+
+{% set total = 0 %}
+{% if authors is empty%}
+<h1>Table vide </h1>
+{% else %}
+<table>
+    <tr>
+        <th>Image</th>
+        <th>Id</th>
+        <th>UserName</th>
+        <th>Email</th>
+        <th></th>
+    </tr>
+{% for item in authors %}
+{% set total = total + item.nb_books %}
+<tr>
+    <td><img src={{item.picture}} > </td>
+<td>{{item.id}}</td>
+<td>{{item.username | upper}}</td>
+<td>{{item.email}}</td>
+<td><a href="{{path('app_service2',{'id':item.id})}}">
+<td><a href="{{path('author_details',{'id':item.id})}}">
+
+  Go to details
+</a></td>
+
+</tr>
+{% endfor %}
+</table>
+{% endif %}
+
+{% if h < 12 %}
+<p>Bonjour</p>
+{% elseif h <18 %}
+<p>bonne soirée</p>
+{% else %}
+<p>Bonsoir</p>
+{% endif %}
+
+{% if 'Test' starts with 'e' %}
+<p>Yes</p>
+{% endif %}
+
+{% if 4 in [1,2,3,5] %}
+<p> Yes </p>
+{% endif %}
+
+{% apply upper %}
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+{% endapply %}
+
+nb books total = {{total}}
+
+{% set tab=[1,2,5,6] %}
+
+Max : {{min(tab)}}
+
+
+

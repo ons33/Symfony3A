@@ -1,0 +1,18 @@
+<table>
+    <tr>
+        <th>ID</th>
+        <th>User Name</th>
+        <th>Email</th>
+        <th>Moyenne</th>
+    </tr>
+    {% for s in students %}
+        <tr>
+            <td>{{s.id}}</td>
+            <td>{{s.username}}</td>
+            <td>{{s.email}}</td>
+            <td>{{s.moyenne}}</td>
+            <td><a href="{{path('app_student_delete',{id:s.id})}}">Delete</a></td>
+        </tr>
+    {% endfor %}
+</table>
+    
