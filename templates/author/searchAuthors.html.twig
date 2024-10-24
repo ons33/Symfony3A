@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Search Authors{% endblock %}
+
+{% block body %}
+<h2>Search Results for "{{ searchName }}"</h2>
+
+{% if authors is empty %}
+    <div class="alert alert-danger">No authors found</div>
+{% else %}
+    <table class="table">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Books</th>
+        </tr>
+        {% for a in authors %}
+            <tr>
+                <td>{{ a.id }}</td>
+                <td>{{ a.name }}</td>
+                <td>{{ a.email }}</td>
+                <td>
+                    <ul>
+                        {% for b in a.books %}
+                            <li>{{ b.title }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+
+<a class="btn btn-primary" href="{{ path('app_author_getall') }}">Back to all authors</a>
+{% endblock %}
